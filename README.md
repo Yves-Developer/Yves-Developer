@@ -12,17 +12,18 @@ I'm passionate about creating dynamic and scalable web applications. With expert
 - JavaScript, ReactJS, NextJS  
 
 ### **Backend:**  
-- NodeJS, Express  
-- .NET, Java (Spring Boot), APIs  
+- NodeJS, Express.js(Basics), PHP,NextJS 
+- Java EE(Basics) APIs  
 
-### **Databases:**  
-- SQL, MySQL  
+### **Databases(DBMS) & Tools:**  
+- SQL, MySQL, PostgreSQL, Sequelize(Basics), Prisma  
 
 ### **Other Tools & Skills:**  
 - Git & GitHub  
 - REST APIs  
 - Data Structures & Algorithms  
-- Agile Development Practices  
+- Agile Development Practices
+- C++ & Java (Basics & OOP)
 
 ---
 
@@ -31,7 +32,7 @@ I'm passionate about creating dynamic and scalable web applications. With expert
 A showcase of my web development projects and skills.
 
 ### **Other Notable Projects:**  
-- **E-Commerce Platform:** Developed using React, Node.js, and MySQL.  
+- **E-Commerce Platform:** Developed using ReactJS,NextJS, Node.js, and Sanity(CRM) & #####LemonSequeezy (Payment Gateway).  
 - **Task Management App:** Built with Next.js and a secure backend API.
 
 ---
@@ -39,14 +40,14 @@ A showcase of my web development projects and skills.
 ## 💼 **Professional Experience**  
 - Developed and deployed full-stack applications using modern web technologies.  
 - Integrated databases and optimized API performance for scalable backend solutions.  
-- Applied Java and C++ for backend design and efficient problem-solving.
+- Applied Java and C++ for efficient problem-solving.
 
 ---
 
 ## 📫 **Let's Connect:**  
 - Email: [yvesmugisha09@gmail.com](mailto:yvesmugisha09@gmail.com)  
 - Portfolio: [yvesdc.vercel.app](https://yvesdc.vercel.app)  
-- LinkedIn: [Your LinkedIn URL]  
+- LinkedIn: [yvesdc](https://www.linkedin.com/in/yvesdc/)
 
 ---
 
