@@ -51,7 +51,7 @@ A showcase of my web development projects and skills.
 ---
 
 ### 🧑‍💻 **GitHub Stats:**  
-![Yves's GitHub Stats](https://github-readme-stats.vercel.app/api?username=YourGitHubUsername&show_icons=true&theme=radical)  
+![Yves's GitHub Stats](https://github-readme-stats.vercel.app/api?username=Yves-Developer&show_icons=true&theme=radical)  
 
 ---
 
