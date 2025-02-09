@@ -1,7 +1,7 @@
 # 👋 Hi, I'm Yves Mugisha  
 
 ### 🌐 Full-Stack Web Developer  
-I'm passionate about creating dynamic and scalable web applications. With expertise in frontend and backend technologies, I enjoy solving complex problems and building user-friendly solutions.
+I'm passionate about creating dynamic and scalable web applications. With expertise in `frontend` and `backend` technologies, I enjoy solving complex problems and building user-friendly solutions.
 
 ---
 
@@ -12,18 +12,18 @@ I'm passionate about creating dynamic and scalable web applications. With expert
 - JavaScript, ReactJS, NextJS  
 
 ### **Backend:**  
-- NodeJS, Express.js(Basics), PHP,NextJS 
-- Java EE(Basics) APIs  
+- `NodeJS`, `Express.js`, `PHP`, `NextJS `
+- `Java EE(Basics) APIs ` 
 
 ### **Databases(DBMS) & Tools:**  
-- SQL, MySQL, PostgreSQL, Sequelize(Basics), Prisma  
+- `SQL`, `MySQL`, `PostgreSQL`, `Sequelize`, `Prisma `, `MongoDB(NoSQL)` 
 
 ### **Other Tools & Skills:**  
 - Git & GitHub  
 - REST APIs  
 - Data Structures & Algorithms  
 - Agile Development Practices
-- C++ & Java (Basics & OOP)
+- `C++ & Java` (Basics & OOP)
 
 ---
 
