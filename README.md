@@ -33,7 +33,7 @@ A showcase of my web development projects and skills.
 
 ### **Other Notable Projects:**  
 - **E-Commerce Platform:** Developed using ReactJS,NextJS, Node.js, and Sanity(CRM) & #####LemonSequeezy (Payment Gateway).  
-- **Task Management App:** Built with Next.js and a secure backend API.
+- **Budget Tracker App:** Built with Next.js and a secure backend API.
 
 ---
 
@@ -54,7 +54,15 @@ A showcase of my web development projects and skills.
 ### 🧑‍💻 **GitHub Stats:**  
 ![Yves's GitHub Stats](https://github-readme-stats.vercel.app/api?username=Yves-Developer&show_icons=true&theme=radical)  
 
----
+![Yves's Contribution Graph](https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Yves-Developer&theme=radical)
+
+
+
+
+[![Yves's GitHub Stats](https://github-readme-stats.vercel.app/api?username=Yves-Developer&show_icons=true&theme=radical)](https://github.com/Yves-Developer)
+[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=Yves-Developer&theme=radical)](https://github.com/Yves-Developer)
+[![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Yves-Developer&layout=compact&theme=radical)](https://github.com/Yves-Developer)
+![](https://visitor-badge.glitch.me/badge?page_id=Yves-Developer.Yves-Developer)
 
 Feel free to reach out and collaborate on exciting projects!  
 
