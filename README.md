@@ -1,69 +1,39 @@
-# 👋 Hi, I'm Yves Mugisha  
+# I'm Yves Mugisha
 
-### 🌐 Full-Stack Web Developer  
-I'm passionate about creating dynamic and scalable web applications. With expertise in `frontend` and `backend` technologies, I enjoy solving complex problems and building user-friendly solutions.
-
----
-
-## 🚀 **Technologies & Tools:**  
-
-### **Frontend:**  
-- HTML, CSS, TailwindCSS  
-- JavaScript, ReactJS, NextJS  
-
-### **Backend:**  
-- `NodeJS`, `Express.js`, `PHP`, `NextJS `
-- `Java EE(Basics) APIs ` 
-
-### **Databases(DBMS) & Tools:**  
-- `SQL`, `MySQL`, `PostgreSQL`, `Sequelize`, `Prisma `, `MongoDB(NoSQL)` 
-
-### **Other Tools & Skills:**  
-- Git & GitHub  
-- REST APIs  
-- Data Structures & Algorithms  
-- Agile Development Practices
-- `C++ & Java` (Basics & OOP)
+ a **Full-Stack Web Developer** passionate about building dynamic, scalable, and user-centric web applications. I work across the stack to create performant solutions with clean UI and robust backend logic.
 
 ---
 
-## 📁 **Projects**  
-### [📌 Portfolio Website](https://yvesdc.vercel.app)  
-A showcase of my web development projects and skills.
+## 🚀 Tech Stack
+  
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=nextdotjs&logoColor=white)
 
-### **Other Notable Projects:**  
-- **E-Commerce Platform:** Developed using ReactJS,NextJS, Node.js, and Sanity(CRM) & #####LemonSequeezy (Payment Gateway).  
-- **Budget Tracker App:** Built with Next.js and a secure backend API.
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-000000?style=flat&logo=express&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat&logo=php&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=java&logoColor=white)
 
----
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=flat&logo=prisma&logoColor=white)
+![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=flat&logo=sequelize&logoColor=white)
 
-## 💼 **Professional Experience**  
-- Developed and deployed full-stack applications using modern web technologies.  
-- Integrated databases and optimized API performance for scalable backend solutions.  
-- Applied Java and C++ for efficient problem-solving.
-
----
-
-## 📫 **Let's Connect:**  
-- Email: [yvesmugisha09@gmail.com](mailto:yvesmugisha09@gmail.com)  
-- Portfolio: [yvesdc.vercel.app](https://yvesdc.vercel.app)  
-- LinkedIn: [yvesdc](https://www.linkedin.com/in/yvesdc/)
-
----
-
-### 🧑‍💻 **GitHub Stats:**  
-![Yves's GitHub Stats](https://github-readme-stats.vercel.app/api?username=Yves-Developer&show_icons=true&theme=radical)  
-[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=Yves-Developer&theme=radical)](https://github.com/Yves-Developer)
-
-[![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Yves-Developer&layout=compact&theme=radical)](https://github.com/Yves-Developer)
-
-![Yves's Contribution Graph](https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Yves-Developer&theme=radical)
-
-
-## GitHub Activity Graph
-![Yves's GitHub Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=Yves-Developer&theme=radical&area=true)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)
+![REST API](https://img.shields.io/badge/REST--API-00b894?style=flat)
+![C++](https://img.shields.io/badge/C++-00599C?style=flat&logo=c%2B%2B&logoColor=white)
 
 ---
 
-Feel free to reach out and collaborate on exciting projects!  
 
+## 📫 Connect with Me
+
+- 📧 Email: [yvesmugisha09@gmail.com](mailto:yvesmugisha09@gmail.com)  
+- 🌍 Portfolio: [yvesdc.vercel.app](https://yvesdc.vercel.app)  
+- 💼 LinkedIn: [linkedin.com/in/yvesdc](https://linkedin.com/in/yvesdc)
