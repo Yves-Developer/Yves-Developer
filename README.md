@@ -37,5 +37,5 @@
 ## 📫 Connect with Me
 
 - 📧 Email: [yvesmugisha09@gmail.com](mailto:yvesmugisha09@gmail.com)  
-- 🌍 Portfolio: [yvesdc.vercel.app](https://yvesdc.vercel.app)  
+- 🌍 Portfolio: [studio.yvesdc.site](https://studio.yvesdc.site)  
 - 💼 LinkedIn: [linkedin.com/in/yvesdc](https://linkedin.com/in/yvesdc)
