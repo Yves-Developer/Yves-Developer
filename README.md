@@ -39,3 +39,5 @@
 - 📧 Email: [yvesmugisha09@gmail.com](mailto:yvesmugisha09@gmail.com)  
 - 🌍 Portfolio: [studio.yvesdc.site](https://studio.yvesdc.site)  
 - 💼 LinkedIn: [linkedin.com/in/yvesdc](https://linkedin.com/in/yvesdc)
+
+![](https://hit.yhype.me/github/profile?account_id=97420310)
