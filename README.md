@@ -1,6 +1,6 @@
 # I'm Yves Mugisha
 
- a **Full-Stack Web Developer** passionate about building dynamic, scalable, and user-centric web applications. I work across the stack to create performant solutions with clean UI and robust backend logic.
+ a **Software Engineer** passionate about building dynamic, scalable, and user-centric web applications, mobile and desktop apps. I work across the stack to create performant solutions with clean UI and robust backend logic.
 
 ---
 
