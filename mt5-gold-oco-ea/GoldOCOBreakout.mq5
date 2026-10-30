@@ -73,7 +73,7 @@ input bool   InpUseTimeStop        = true;   // Close if profit not locked in ti
 input int    InpTimeStopMin        = 10;     // Minutes allowed to reach the lock
 
 input group "=== Session (broker server time) ==="
-input bool   InpUseSession         = true;   // Trade only inside session
+input bool   InpUseSession         = false;  // Trade only inside session (off = trade any time)
 input string InpSessionStart       = "15:30";// Session start HH:MM (server time)
 input string InpSessionEnd         = "19:00";// Session end HH:MM (server time)
 input bool   InpCloseAtSessionEnd  = false;  // Close open trade when session ends
@@ -88,7 +88,7 @@ input bool   InpCloseBeforeNews    = true;   // Also close open trade before new
 input string InpManualNews         = "";     // Extra news "yyyy.mm.dd hh:mi;..." (server time, works in tester)
 
 input group "=== Risk limits ==="
-input double InpMaxSpreadPips      = 0.35;   // Max spread to place orders (pips)
+input double InpMaxSpreadPips      = 0.60;   // Max spread to place orders (pips)
 input int    InpMaxLossesPerDay    = 3;      // Stop after N losing trades today (0 = off)
 input double InpMaxDailyLoss       = 150.0;  // Stop after losing this much today (0 = off)
 input double InpDailyProfitTarget  = 0.0;    // Stop after making this much today (0 = off)

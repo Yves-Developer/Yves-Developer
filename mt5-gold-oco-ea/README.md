@@ -12,7 +12,7 @@ An Expert Advisor for **XAUUSD** that runs this cycle:
    - **time stop**: closes the trade if it hasn't reached the lock within 10 minutes
 4. When the trade closes, it places a new pair.
 
-It only trades inside the **New York session**, pauses around **high-impact USD news**, skips orders when the **spread is wide**, and stops for the day after the **daily loss limits** are hit.
+It starts as soon as it is attached (an optional session filter is available), pauses around **high-impact USD news**, skips orders when the **spread is wide**, and stops for the day after the **daily loss limits** are hit.
 
 ## Pip convention
 
@@ -52,7 +52,8 @@ Compare Market Watch time with New York time and adjust `InpSessionStart` / `Inp
 | `InpUseLadder` | off | Extra locks: +1.5 → +0.8, +3.0 → +2.0 |
 | `InpUsePartialClose` | off | Close 50% at +1.0 pips |
 | `InpUseTimeStop` / `InpTimeStopMin` | on / 10 | Close if not locked in time |
-| `InpMaxSpreadPips` | 0.35 | No new orders above this spread |
+| `InpUseSession` | off | Off = starts trading as soon as the EA is on; on = only between `InpSessionStart` and `InpSessionEnd` (server time) |
+| `InpMaxSpreadPips` | 0.60 | No new orders above this spread |
 | `InpMaxLossesPerDay` / `InpMaxDailyLoss` | 3 / 150 | Stop for the day |
 | `InpCooldownSecAfterLoss` | 90 | Pause after a losing trade |
 | `InpUseNewsFilter` | on | No trading 15 min before / after high-impact USD news |
