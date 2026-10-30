@@ -46,7 +46,7 @@ Compare Market Watch time with New York time and adjust `InpSessionStart` / `Inp
 | `InpLotMode` / `InpFixedLot` / `InpRiskMoney` | Fixed, 0.15, 60 | Fixed lot, or a lot calculated so the SL costs `InpRiskMoney` |
 | `InpEntryOffsetPips` | 0.735 | Pending order distance from the reference |
 | `InpPendingExpiryMin` | 30 | Re-center untriggered orders around current price |
-| `InpStopLossPips` / `InpTakeProfitPips` | 4.0 / 0 | Initial SL; TP 0 = no TP, exit by trailing |
+| `InpStopLossPips` / `InpTakeProfitPips` | 4.0 / 20.0 | Initial SL and TP (TP 0 = none, exit by trailing only) |
 | `InpBETriggerPips` / `InpBELockPips` | 0.6 / 0.2 | Break-even lock |
 | `InpTrailStartPips` / `InpTrailGapPips` / `InpTrailStepPips` | 0.6 / 0.4 / 0.05 | Trailing stop |
 | `InpUseLadder` | off | Extra locks: +1.5 → +0.8, +3.0 → +2.0 |
