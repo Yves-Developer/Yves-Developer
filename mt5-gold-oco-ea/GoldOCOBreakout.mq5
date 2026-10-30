@@ -15,7 +15,7 @@
 //|  (0.15 lot x 4 pips = $60).                                       |
 //+------------------------------------------------------------------+
 #property copyright "Yves Developer"
-#property version   "1.20"
+#property version   "1.30"
 #property description "Gold OCO breakout: Buy Stop + Sell Stop around last close,"
 #property description "break-even lock, trailing stop, time stop, news/spread filters."
 
@@ -82,8 +82,8 @@ input string InpManualNews         = "";     // Extra news "yyyy.mm.dd hh:mi;...
 
 input group "=== Risk limits ==="
 input double InpMaxSpreadPips      = 0.60;   // Max spread to place orders (pips)
-input int    InpMaxLossesPerDay    = 3;      // Stop after N losing trades today (0 = off)
-input double InpMaxDailyLoss       = 150.0;  // Stop after losing this much today (0 = off)
+input int    InpMaxLossesPerDay    = 0;      // Stop after N losing trades today (0 = off)
+input double InpMaxDailyLoss       = 0.0;    // Stop after losing this much today (0 = off)
 input double InpDailyProfitTarget  = 0.0;    // Stop after making this much today (0 = off)
 input int    InpCooldownSecAfterLoss = 0;    // Wait N seconds after a loss (0 = re-enter immediately)
 
@@ -628,7 +628,7 @@ void UpdatePanel()
       return;
    MqlTick tk;
    SymbolInfoTick(_Symbol, tk);
-   Comment("Gold OCO Breakout v1.2  |  ", _Symbol, "  |  lots ", DoubleToString(CalcLots(), 2),
+   Comment("Gold OCO Breakout v1.3  |  ", _Symbol, "  |  lots ", DoubleToString(CalcLots(), 2),
            "  |  spread ", DoubleToString((tk.ask - tk.bid) / InpPipSize, 3), " pips\n",
            "Status: ", gStatus, "\n",
            StatsLine("Today", gDay), "\n",

@@ -12,7 +12,7 @@ An Expert Advisor for **XAUUSD** that runs this cycle:
    - optional time stop (off by default)
 4. When the trade closes (SL hit or trailed SL hit), it immediately places a new pair around the closing price.
 
-It starts as soon as it is attached, pauses around **high-impact USD news**, skips orders when the **spread is wide**, and stops for the day after the **daily loss limits** are hit.
+It starts as soon as it is attached, pauses around **high-impact USD news**, skips orders when the **spread is wide**. After every close, win or loss, it places the next pair immediately.
 
 ## Pip convention
 
@@ -47,7 +47,7 @@ When the EA starts, the Experts tab prints the symbol's digits, stop level, lot 
 | `InpUsePartialClose` | off | Close 50% at +1.0 pips |
 | `InpUseTimeStop` / `InpTimeStopMin` | off / 10 | Optional: close if not locked in time |
 | `InpMaxSpreadPips` | 0.60 | No new orders above this spread |
-| `InpMaxLossesPerDay` / `InpMaxDailyLoss` | 3 / 150 | Stop for the day |
+| `InpMaxLossesPerDay` / `InpMaxDailyLoss` | 0 / 0 (off) | Optional: stop for the day after N losses or this much loss |
 | `InpCooldownSecAfterLoss` | 0 | 0 = new pair placed immediately after a loss |
 | `InpUseNewsFilter` | on | No trading 15 min before / after high-impact USD news |
 
