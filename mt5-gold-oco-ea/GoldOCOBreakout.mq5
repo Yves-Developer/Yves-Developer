@@ -15,7 +15,7 @@
 //|  (0.15 lot x 4 pips = $60).                                       |
 //+------------------------------------------------------------------+
 #property copyright "Yves Developer"
-#property version   "1.30"
+#property version   "1.40"
 #property description "Gold OCO breakout: Buy Stop + Sell Stop around last close,"
 #property description "break-even lock, trailing stop, time stop, news/spread filters."
 
@@ -55,6 +55,9 @@ input bool   InpUseTrailing        = true;   // Use trailing stop
 input double InpTrailStartPips     = 0.6;    // Start trailing at profit (pips)
 input double InpTrailGapPips       = 0.4;    // Distance of SL behind price (pips)
 input double InpTrailStepPips      = 0.05;   // Min SL improvement per modify (pips)
+input bool   InpUseWideTrail       = true;   // Widen the trail once profit grows
+input double InpWideTrailStartPips = 2.0;    // Profit at which the wide trail starts (pips)
+input double InpWideTrailGapPips   = 1.0;    // Wide trail distance behind price (pips)
 
 input group "=== Profit ladder (optional) ==="
 input bool   InpUseLadder          = false;  // Use profit ladder
@@ -80,6 +83,14 @@ input int    InpNewsMinutesAfter   = 15;     // Resume N minutes after news
 input bool   InpCloseBeforeNews    = true;   // Also close open trade before news
 input string InpManualNews         = "";     // Extra news "yyyy.mm.dd hh:mi;..." (server time, works in tester)
 
+input group "=== Whipsaw protection ==="
+input bool   InpUseLossStreakPause = true;   // Pause after consecutive losses
+input int    InpStreakLosses       = 2;      // Losses in a row that trigger the pause
+input int    InpStreakPauseMin     = 15;     // Pause length (minutes)
+input bool   InpUseVolFilter       = true;   // Pause when 1-minute candles are too big
+input int    InpVolBars            = 3;      // Number of M1 candles checked (incl. current)
+input double InpVolMaxRangePips    = 2.5;    // Max high-low range of any checked candle (pips)
+
 input group "=== Risk limits ==="
 input double InpMaxSpreadPips      = 0.60;   // Max spread to place orders (pips)
 input int    InpMaxLossesPerDay    = 0;      // Stop after N losing trades today (0 = off)
@@ -101,6 +112,7 @@ struct Stats
    datetime lastCloseTime;
    double   lastClosePrice;
    datetime lastLossTime;
+   int      lossStreak; // losses in a row, counting back from the latest closed trade
   };
 
 CTrade   trade;
@@ -298,10 +310,15 @@ void CollectStats(const datetime from, Stats &s)
         }
      }
 
+   double closed[][2]; // [close time, pnl], sorted by time for the loss streak
    for(int k = 0; k < ArraySize(ids); k++)
      {
       if(closeT[k] == 0 || PositionSelectByTicket(ids[k]))
          continue; // never closed, or still open after a partial close
+      int c = ArrayRange(closed, 0);
+      ArrayResize(closed, c + 1);
+      closed[c][0] = (double)closeT[k];
+      closed[c][1] = pnl[k];
       s.trades++;
       s.net += pnl[k];
       if(pnl[k] >= 0.0)
@@ -317,6 +334,32 @@ void CollectStats(const datetime from, Stats &s)
             s.lastLossTime = closeT[k];
         }
      }
+
+   int n = ArrayRange(closed, 0);
+   if(n > 1)
+      ArraySort(closed);
+   for(int i = n - 1; i >= 0 && closed[i][1] < 0.0; i--)
+      s.lossStreak++;
+  }
+
+bool StreakPaused()
+  {
+   return InpUseLossStreakPause && InpStreakLosses > 0 && gDay.lossStreak >= InpStreakLosses &&
+          TimeCurrent() - gDay.lastLossTime < InpStreakPauseMin * 60;
+  }
+
+bool VolatilityHigh()
+  {
+   if(!InpUseVolFilter)
+      return false;
+   for(int i = 0; i < InpVolBars; i++)
+     {
+      double h = iHigh(_Symbol, PERIOD_M1, i);
+      double l = iLow(_Symbol, PERIOD_M1, i);
+      if(h > 0.0 && l > 0.0 && h - l > Pips(InpVolMaxRangePips))
+         return true;
+     }
+   return false;
   }
 
 void RefreshStats()
@@ -588,7 +631,11 @@ void ManagePosition(const ulong ticket)
    if(InpUseLadder && profit >= Pips(InpLadder2TriggerPips))
       Tighten(isBuy, isBuy ? open + Pips(InpLadder2LockPips) : open - Pips(InpLadder2LockPips), newSL);
    if(InpUseTrailing && profit >= Pips(InpTrailStartPips))
-      Tighten(isBuy, isBuy ? price - Pips(InpTrailGapPips) : price + Pips(InpTrailGapPips), newSL);
+     {
+      double gap = (InpUseWideTrail && profit >= Pips(InpWideTrailStartPips))
+                   ? Pips(InpWideTrailGapPips) : Pips(InpTrailGapPips);
+      Tighten(isBuy, isBuy ? price - gap : price + gap, newSL);
+     }
 
    if(newSL == sl)
       return;
@@ -628,7 +675,7 @@ void UpdatePanel()
       return;
    MqlTick tk;
    SymbolInfoTick(_Symbol, tk);
-   Comment("Gold OCO Breakout v1.3  |  ", _Symbol, "  |  lots ", DoubleToString(CalcLots(), 2),
+   Comment("Gold OCO Breakout v1.4  |  ", _Symbol, "  |  lots ", DoubleToString(CalcLots(), 2),
            "  |  spread ", DoubleToString((tk.ask - tk.bid) / InpPipSize, 3), " pips\n",
            "Status: ", gStatus, "\n",
            StatsLine("Today", gDay), "\n",
@@ -720,8 +767,10 @@ void OnTick()
       return;
      }
 
-   bool limit = DailyLimitHit();
-   bool keep  = !weekend && !news && !limit;
+   bool limit  = DailyLimitHit();
+   bool streak = StreakPaused();
+   bool vol    = VolatilityHigh();
+   bool keep   = !weekend && !news && !limit && !streak && !vol;
 
    if(nq > 0)
      {
@@ -742,6 +791,11 @@ void OnTick()
       gStatus = "News pause";
    else if(limit)
       gStatus = "Daily limit reached - done for today";
+   else if(streak)
+      gStatus = StringFormat("Paused after %d losses in a row - %d min left", gDay.lossStreak,
+                             (int)((InpStreakPauseMin * 60 - (TimeCurrent() - gDay.lastLossTime)) / 60) + 1);
+   else if(vol)
+      gStatus = "High volatility - waiting for calmer candles";
    else if(cooldown)
       gStatus = "Cooldown after loss";
    else if(!spreadOk)

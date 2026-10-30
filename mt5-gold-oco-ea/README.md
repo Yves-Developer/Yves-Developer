@@ -7,12 +7,12 @@ An Expert Advisor for **XAUUSD** that runs this cycle:
 3. Manages the trade:
    - initial stop loss (default 4 pips = $4.00 gold move)
    - **break-even lock**: at +0.6 pips, the SL moves to +0.2 pips
-   - **trailing stop**: 0.4 pips behind price
+   - **trailing stop**: 0.4 pips behind price, widening to 1.0 pip once profit reaches +2 pips
    - optional profit ladder and partial close
    - optional time stop (off by default)
 4. When the trade closes (SL hit or trailed SL hit), it immediately places a new pair around the closing price.
 
-It starts as soon as it is attached, pauses around **high-impact USD news**, skips orders when the **spread is wide**. After every close, win or loss, it places the next pair immediately.
+It starts as soon as it is attached, pauses around **high-impact USD news**, skips orders when the **spread is wide**. After every close it places the next pair immediately, except after 2 losses in a row or during very fast candles, when it waits (whipsaw protection).
 
 ## Pip convention
 
@@ -43,9 +43,12 @@ When the EA starts, the Experts tab prints the symbol's digits, stop level, lot 
 | `InpStopLossPips` / `InpTakeProfitPips` | 4.0 / 0 | Initial SL; no TP by default, profit is secured by the trailing stop |
 | `InpBETriggerPips` / `InpBELockPips` | 0.6 / 0.2 | Break-even lock |
 | `InpTrailStartPips` / `InpTrailGapPips` / `InpTrailStepPips` | 0.6 / 0.4 / 0.05 | Trailing stop |
+| `InpUseWideTrail` / `InpWideTrailStartPips` / `InpWideTrailGapPips` | on / 2.0 / 1.0 | Wider trail once profit grows, so big moves can run |
 | `InpUseLadder` | off | Extra locks: +1.5 → +0.8, +3.0 → +2.0 |
 | `InpUsePartialClose` | off | Close 50% at +1.0 pips |
 | `InpUseTimeStop` / `InpTimeStopMin` | off / 10 | Optional: close if not locked in time |
+| `InpUseLossStreakPause` / `InpStreakLosses` / `InpStreakPauseMin` | on / 2 / 15 | Pause 15 min after 2 losses in a row (whipsaw protection) |
+| `InpUseVolFilter` / `InpVolBars` / `InpVolMaxRangePips` | on / 3 / 2.5 | No new orders while any of the last 3 M1 candles is bigger than 2.5 pips |
 | `InpMaxSpreadPips` | 0.60 | No new orders above this spread |
 | `InpMaxLossesPerDay` / `InpMaxDailyLoss` | 0 / 0 (off) | Optional: stop for the day after N losses or this much loss |
 | `InpCooldownSecAfterLoss` | 0 | 0 = new pair placed immediately after a loss |
