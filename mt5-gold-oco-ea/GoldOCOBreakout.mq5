@@ -15,7 +15,7 @@
 //|  (0.15 lot x 4 pips = $60).                                       |
 //+------------------------------------------------------------------+
 #property copyright "Yves Developer"
-#property version   "1.10"
+#property version   "1.20"
 #property description "Gold OCO breakout: Buy Stop + Sell Stop around last close,"
 #property description "break-even lock, trailing stop, time stop, news/spread filters."
 
@@ -39,7 +39,7 @@ input double InpRiskMoney          = 60.0;   // Max loss per trade in money (ris
 input group "=== Entry ==="
 input double InpEntryOffsetPips    = 0.735;  // Pending distance from reference (pips)
 input int    InpMaxRefAgeSec       = 60;     // Use last close as reference if closed within N sec
-input int    InpPendingExpiryMin   = 30;     // Re-center pendings after N minutes (0 = never)
+input int    InpPendingExpiryMin   = 0;      // Re-center pendings after N minutes (0 = never)
 
 input group "=== Stop loss / Take profit ==="
 input double InpStopLossPips       = 4.0;    // Initial stop loss (pips)
@@ -69,7 +69,7 @@ input double InpPartialTriggerPips = 1.0;    // Close part at profit (pips)
 input double InpPartialPercent     = 50.0;   // Percent of volume to close
 
 input group "=== Time stop ==="
-input bool   InpUseTimeStop        = true;   // Close if profit not locked in time
+input bool   InpUseTimeStop        = false;  // Close if profit not locked in time
 input int    InpTimeStopMin        = 10;     // Minutes allowed to reach the lock
 
 input group "=== News filter ==="
@@ -85,7 +85,7 @@ input double InpMaxSpreadPips      = 0.60;   // Max spread to place orders (pips
 input int    InpMaxLossesPerDay    = 3;      // Stop after N losing trades today (0 = off)
 input double InpMaxDailyLoss       = 150.0;  // Stop after losing this much today (0 = off)
 input double InpDailyProfitTarget  = 0.0;    // Stop after making this much today (0 = off)
-input int    InpCooldownSecAfterLoss = 90;   // Wait N seconds after a loss
+input int    InpCooldownSecAfterLoss = 0;    // Wait N seconds after a loss (0 = re-enter immediately)
 
 input group "=== Display ==="
 input bool   InpShowPanel          = true;   // Show stats on chart
@@ -628,7 +628,7 @@ void UpdatePanel()
       return;
    MqlTick tk;
    SymbolInfoTick(_Symbol, tk);
-   Comment("Gold OCO Breakout v1.1  |  ", _Symbol, "  |  lots ", DoubleToString(CalcLots(), 2),
+   Comment("Gold OCO Breakout v1.2  |  ", _Symbol, "  |  lots ", DoubleToString(CalcLots(), 2),
            "  |  spread ", DoubleToString((tk.ask - tk.bid) / InpPipSize, 3), " pips\n",
            "Status: ", gStatus, "\n",
            StatsLine("Today", gDay), "\n",

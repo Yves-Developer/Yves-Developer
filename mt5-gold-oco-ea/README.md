@@ -9,8 +9,8 @@ An Expert Advisor for **XAUUSD** that runs this cycle:
    - **break-even lock**: at +0.6 pips, the SL moves to +0.2 pips
    - **trailing stop**: 0.4 pips behind price
    - optional profit ladder and partial close
-   - **time stop**: closes the trade if it hasn't reached the lock within 10 minutes
-4. When the trade closes, it places a new pair.
+   - optional time stop (off by default)
+4. When the trade closes (SL hit or trailed SL hit), it immediately places a new pair around the closing price.
 
 It starts as soon as it is attached, pauses around **high-impact USD news**, skips orders when the **spread is wide**, and stops for the day after the **daily loss limits** are hit.
 
@@ -39,16 +39,16 @@ When the EA starts, the Experts tab prints the symbol's digits, stop level, lot 
 |---|---|---|
 | `InpLotMode` / `InpFixedLot` / `InpRiskMoney` | Fixed, 0.15, 60 | Fixed lot, or a lot calculated so the SL costs `InpRiskMoney` |
 | `InpEntryOffsetPips` | 0.735 | Pending order distance from the reference |
-| `InpPendingExpiryMin` | 30 | Re-center untriggered orders around current price |
+| `InpPendingExpiryMin` | 0 | 0 = pending orders wait until triggered; N = re-center after N minutes |
 | `InpStopLossPips` / `InpTakeProfitPips` | 4.0 / 0 | Initial SL; no TP by default, profit is secured by the trailing stop |
 | `InpBETriggerPips` / `InpBELockPips` | 0.6 / 0.2 | Break-even lock |
 | `InpTrailStartPips` / `InpTrailGapPips` / `InpTrailStepPips` | 0.6 / 0.4 / 0.05 | Trailing stop |
 | `InpUseLadder` | off | Extra locks: +1.5 → +0.8, +3.0 → +2.0 |
 | `InpUsePartialClose` | off | Close 50% at +1.0 pips |
-| `InpUseTimeStop` / `InpTimeStopMin` | on / 10 | Close if not locked in time |
+| `InpUseTimeStop` / `InpTimeStopMin` | off / 10 | Optional: close if not locked in time |
 | `InpMaxSpreadPips` | 0.60 | No new orders above this spread |
 | `InpMaxLossesPerDay` / `InpMaxDailyLoss` | 3 / 150 | Stop for the day |
-| `InpCooldownSecAfterLoss` | 90 | Pause after a losing trade |
+| `InpCooldownSecAfterLoss` | 0 | 0 = new pair placed immediately after a loss |
 | `InpUseNewsFilter` | on | No trading 15 min before / after high-impact USD news |
 
 ## Testing
