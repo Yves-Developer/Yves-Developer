@@ -15,9 +15,9 @@
 //|  (0.15 lot x 4 pips = $60).                                       |
 //+------------------------------------------------------------------+
 #property copyright "Yves Developer"
-#property version   "1.00"
+#property version   "1.10"
 #property description "Gold OCO breakout: Buy Stop + Sell Stop around last close,"
-#property description "break-even lock, trailing stop, time stop, session/news/spread filters."
+#property description "break-even lock, trailing stop, time stop, news/spread filters."
 
 #include <Trade/Trade.mqh>
 
@@ -71,13 +71,6 @@ input double InpPartialPercent     = 50.0;   // Percent of volume to close
 input group "=== Time stop ==="
 input bool   InpUseTimeStop        = true;   // Close if profit not locked in time
 input int    InpTimeStopMin        = 10;     // Minutes allowed to reach the lock
-
-input group "=== Session (broker server time) ==="
-input bool   InpUseSession         = false;  // Trade only inside session (off = trade any time)
-input string InpSessionStart       = "15:30";// Session start HH:MM (server time)
-input string InpSessionEnd         = "19:00";// Session end HH:MM (server time)
-input bool   InpCloseAtSessionEnd  = false;  // Close open trade when session ends
-input bool   InpTradeFriday        = true;   // Trade on Friday
 
 input group "=== News filter ==="
 input bool   InpUseNewsFilter      = true;   // Pause around high-impact news
@@ -173,32 +166,11 @@ double CalcLots()
    return NormLots(lots);
   }
 
-int ParseHM(const string s)
-  {
-   string p[];
-   if(StringSplit(s, ':', p) != 2)
-      return -1;
-   return (int)StringToInteger(p[0]) * 60 + (int)StringToInteger(p[1]);
-  }
-
-bool InSession()
+bool IsWeekend()
   {
    MqlDateTime t;
    TimeToStruct(TimeCurrent(), t);
-   if(t.day_of_week == 0 || t.day_of_week == 6)
-      return false;
-   if(t.day_of_week == 5 && !InpTradeFriday)
-      return false;
-   if(!InpUseSession)
-      return true;
-   int now = t.hour * 60 + t.min;
-   int s   = ParseHM(InpSessionStart);
-   int e   = ParseHM(InpSessionEnd);
-   if(s < 0 || e < 0)
-      return true;
-   if(s <= e)
-      return (now >= s && now < e);
-   return (now >= s || now < e);
+   return (t.day_of_week == 0 || t.day_of_week == 6);
   }
 
 //+------------------------------------------------------------------+
@@ -656,7 +628,7 @@ void UpdatePanel()
       return;
    MqlTick tk;
    SymbolInfoTick(_Symbol, tk);
-   Comment("Gold OCO Breakout  |  ", _Symbol, "  |  lots ", DoubleToString(CalcLots(), 2),
+   Comment("Gold OCO Breakout v1.1  |  ", _Symbol, "  |  lots ", DoubleToString(CalcLots(), 2),
            "  |  spread ", DoubleToString((tk.ask - tk.bid) / InpPipSize, 3), " pips\n",
            "Status: ", gStatus, "\n",
            StatsLine("Today", gDay), "\n",
@@ -719,7 +691,7 @@ void OnTick()
    RefreshNews();
 
    bool news    = NewsBlocked();
-   bool session = InSession();
+   bool weekend = IsWeekend();
 
    ulong pos[], pend[];
    int np = GetPositions(pos);
@@ -739,11 +711,6 @@ void OnTick()
          CloseAllPositions();
          gStatus = "News - closed trade";
         }
-      else if(!session && InpCloseAtSessionEnd)
-        {
-         CloseAllPositions();
-         gStatus = "Session ended - closed trade";
-        }
       else
         {
          ManagePosition(pos[0]);
@@ -754,7 +721,7 @@ void OnTick()
      }
 
    bool limit = DailyLimitHit();
-   bool keep  = session && !news && !limit;
+   bool keep  = !weekend && !news && !limit;
 
    if(nq > 0)
      {
@@ -769,8 +736,8 @@ void OnTick()
    bool spreadOk = (tk.ask - tk.bid) <= Pips(InpMaxSpreadPips);
    bool cooldown = gDay.lastLossTime > 0 && TimeCurrent() - gDay.lastLossTime < InpCooldownSecAfterLoss;
 
-   if(!session)
-      gStatus = "Outside session";
+   if(weekend)
+      gStatus = "Weekend - market closed";
    else if(news)
       gStatus = "News pause";
    else if(limit)
