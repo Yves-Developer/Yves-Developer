@@ -310,21 +310,19 @@ void CollectStats(const datetime from, Stats &s)
         }
      }
 
-   double closed[][2]; // [close time, pnl], sorted by time for the loss streak
+   datetime lastWinTime = 0;
    for(int k = 0; k < ArraySize(ids); k++)
      {
       if(closeT[k] == 0 || PositionSelectByTicket(ids[k]))
          continue; // never closed, or still open after a partial close
-      int c = ArrayRange(closed, 0);
-      ArrayResize(closed, c + 1);
-      closed[c][0] = (double)closeT[k];
-      closed[c][1] = pnl[k];
       s.trades++;
       s.net += pnl[k];
       if(pnl[k] >= 0.0)
         {
          s.wins++;
          s.grossWin += pnl[k];
+         if(closeT[k] > lastWinTime)
+            lastWinTime = closeT[k];
         }
       else
         {
@@ -335,11 +333,10 @@ void CollectStats(const datetime from, Stats &s)
         }
      }
 
-   int n = ArrayRange(closed, 0);
-   if(n > 1)
-      ArraySort(closed);
-   for(int i = n - 1; i >= 0 && closed[i][1] < 0.0; i--)
-      s.lossStreak++;
+   // Losses in a row = losing trades closed after the latest winning trade.
+   for(int k = 0; k < ArraySize(ids); k++)
+      if(closeT[k] > lastWinTime && pnl[k] < 0.0 && !PositionSelectByTicket(ids[k]))
+         s.lossStreak++;
   }
 
 bool StreakPaused()
