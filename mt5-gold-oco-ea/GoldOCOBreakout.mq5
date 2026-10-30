@@ -43,7 +43,7 @@ input int    InpPendingExpiryMin   = 30;     // Re-center pendings after N minut
 
 input group "=== Stop loss / Take profit ==="
 input double InpStopLossPips       = 4.0;    // Initial stop loss (pips)
-input double InpTakeProfitPips     = 20.0;   // Take profit (pips, 0 = none, trail only)
+input double InpTakeProfitPips     = 0.0;    // Take profit (pips, 0 = none, trail only)
 
 input group "=== Break-even lock ==="
 input bool   InpUseBreakEven       = true;   // Use break-even lock
